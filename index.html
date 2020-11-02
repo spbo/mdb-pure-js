@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Movie Rama</title>
+        <link rel="stylesheet" href="styles/styles.css">
+        <link rel="shortcut icon" href="#"> <!--for don't show the error message-->
+    </head>
+    <body>
+        <header class="header">
+            <h1 class="header_title">Welcome to the Movie Rama</h1>
+        </header>
+        
+        <div class="actions">
+            <span id="now-in-theaters">Now playing in theaters</span>
+            <input type="text" class="search-movie" placeholder=" Search for a movie" name="text"/>
+        </div>
+       
+        <div class="container">
+            <ul id="movies"></ul>
+        </div>
+
+    </body>
+    <script src="scripts/requests.js"></script>
+    <script src="scripts/functions.js"></script>
+    <script src="scripts/app.js"></script>
+</html>
