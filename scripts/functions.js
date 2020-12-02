@@ -1,3 +1,4 @@
+// fetching movies (only for page 1) and genres
 const nowPlayingMovies = () => {
   Promise.all([
     getNowPlayingMovies(),
@@ -7,6 +8,7 @@ const nowPlayingMovies = () => {
   }).catch(err => console.log(`Error in now playing Movies: ${err}`))
 }
 
+// fetching movies (for all other pages) and genres - used as a infinite scrolling
 const infiniteMovies = (pageNum) => {
   Promise.all([
     getNowPlayingMovies(pageNum),
@@ -16,6 +18,7 @@ const infiniteMovies = (pageNum) => {
   }).catch(err => console.log(`Error in infinite Movies: ${err}`))
 }
 
+// implementation of dom
 const generateDOM = (movie, genres, isLastMovie) => {
   const movieEl = document.createElement('li')
   const titleEl = document.createElement('div')
@@ -62,7 +65,6 @@ const generateDOM = (movie, genres, isLastMovie) => {
     movieEl.classList.add('list-item')
   }
 
-  // movieEl.classList.add('list-item')
   containerEl.classList.add('list-item__container')
   movieEl.appendChild(containerEl)
 
@@ -162,7 +164,9 @@ const generateDOM = (movie, genres, isLastMovie) => {
   return movieEl
 }
 
+// rendering fetched movies and genres for page 1
 const renderMovies = (movies, genres, counterForMovies) => {
+  // Add an indication that all movies have been loaded
   const moviesEl = document.querySelector('#movies')
   while (moviesEl.firstChild) moviesEl.removeChild(moviesEl.firstChild)
   let isLastMovie = false
@@ -174,7 +178,7 @@ const renderMovies = (movies, genres, counterForMovies) => {
     moviesEl.appendChild(movieEl)
   })
 
-
+  // implementation of infinite scroll
   let target = document.querySelector('.list-item-lastMovie')
 
   let options = {
@@ -199,6 +203,7 @@ const renderMovies = (movies, genres, counterForMovies) => {
 
 }
 
+// rendering fetched movies and genres for all other apges
 const renderInfiniteMovies = (movies, genres, counterForMovies) => {
   // Add an indication that all movies have been loaded
   const moviesEl = document.querySelector('#movies')
@@ -211,7 +216,7 @@ const renderInfiniteMovies = (movies, genres, counterForMovies) => {
     moviesEl.appendChild(movieEl)
   })
 
-
+  // implementation of infinite scroll
   let target = document.querySelector('.list-item-lastMovie')
 
   let options = {
@@ -237,6 +242,7 @@ const renderInfiniteMovies = (movies, genres, counterForMovies) => {
 
 }
 
+// fetching searched query
 const searching = textForSearch => {
   Promise.all([
     getSearch(textForSearch),
